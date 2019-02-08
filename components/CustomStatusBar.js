@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
   statusBarContainer: {
     backgroundColor: veryberry,
     height: Constants.statusBarHeight,
-    marginBottom: 10,
   },
   statusBar: {
     backgroundColor: veryberry

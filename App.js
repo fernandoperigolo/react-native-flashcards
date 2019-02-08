@@ -1,19 +1,28 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import { createMaterialTopTabNavigator, createAppContainer } from 'react-navigation'
 import CustomStatusBar from './components/CustomStatusBar'
-import DeckListItem from './components/DeckListItem'
+import DeckList from './screens/DeckList'
+import DeckCreate from './screens/DeckCreate'
+
+const TabNavigator = createMaterialTopTabNavigator({
+  DeckList: {
+    screen: DeckList,
+  },
+  DeckCreate: {
+    screen: DeckCreate,
+  },
+})
+
+const AppContainer = createAppContainer(TabNavigator)
 
 export default class App extends React.Component {
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <CustomStatusBar />
 
-        <DeckListItem name='React' qty={8} />
-        <DeckListItem name='Redux' qty={12} />
-        <DeckListItem name='Javascript' qty={21} />
-        <DeckListItem name='Ruby' qty={9} />
-
+        <AppContainer />
       </View>
     )
   }
