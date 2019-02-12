@@ -1,15 +1,21 @@
 import React from 'react'
+import { withNavigation } from 'react-navigation'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { lightgray, white } from '../utils/colors'
+import { lightgray } from '../utils/colors'
 
-export default class DeckListItem extends React.Component {
+class DeckListItem extends React.Component {
+  navigateTo = (deck) => {
+    console.log('props DeckListItem:', this.props)
+    this.props.navigation.navigate('DeckDetail', {deck})
+  }
+
   render() {
-    const { name, qty } = this.props
+    const { id, title, cardsQty } = this.props.deck
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => this.navigateTo(this.props.deck)}>
         <View style={styles.deckContainer}>
-          <Text style={styles.deckName}>{name}</Text>
-          <Text style={styles.deckCardsQty}>{qty} cards</Text>
+          <Text style={styles.deckName}>{title} - {id}</Text>
+          <Text style={styles.deckCardsQty}>{cardsQty} cards</Text>
         </View>
       </TouchableOpacity>
     )
@@ -30,3 +36,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 })
+
+export default withNavigation(DeckListItem)

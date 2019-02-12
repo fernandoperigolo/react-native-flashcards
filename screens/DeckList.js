@@ -18,7 +18,7 @@ class DeckList extends React.Component {
     return (
       <View style={styles.container}>
         {Object.keys(decks).map((id) => (
-          <DeckListItem key={id} name={decks[id].title} qty={decks[id].cardsQty} />
+          <DeckListItem key={id} deck={decks[id]} />
         ))}
 
         <Text onPress={this.handleClearAll}>Clear All</Text>
