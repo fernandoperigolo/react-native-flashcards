@@ -24,10 +24,10 @@ function submitDeck (deck) {
   }
 }
 
-function removeDeck (deckId) {
+function removeDeck (id) {
   return {
     type: REMOVE_DECK,
-    deckId,
+    id,
   }
 }
 
@@ -83,10 +83,10 @@ export function handleEditDeck (deck) {
   }
 }
 
-export function handleDeleteDeck (deckId) {
+export function handleDeleteDeck (deck) {
   return (dispatch) => {
-    return removeDeckAPI(deckId)
-      .then((deckId) => dispatch(removeDeck(deckId)))
+    return removeDeckAPI(deck.id)
+      .then(dispatch(removeDeck(deck.id)))
       .catch(error =>  console.warn(error))
   }
 }

@@ -18,7 +18,7 @@ export default function decks(state = {}, action) {
       }
     case REMOVE_DECK :
       const newState = {...state}
-      delete newState[action.deck.id]
+      delete newState[action.id]
       return newState
     case CLEAR_ALL_DECKS:
       return {}

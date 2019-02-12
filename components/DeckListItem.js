@@ -5,7 +5,6 @@ import { lightgray } from '../utils/colors'
 
 class DeckListItem extends React.Component {
   navigateTo = (deck) => {
-    console.log('props DeckListItem:', this.props)
     this.props.navigation.navigate('DeckDetail', {deck})
   }
 
