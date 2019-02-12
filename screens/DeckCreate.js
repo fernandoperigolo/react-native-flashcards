@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { handleAddDeck, handleClearAllDecks } from '../actions/decks'
-import { View, Text } from 'react-native'
+import { handleAddDeck } from '../actions/decks'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { veryberry } from '../utils/colors'
 
 class DeckCreate extends React.Component {
   state = {
-    title: 'Deck 1',
+    title: '',
     submitedFlag: false,
   }
 
@@ -19,24 +20,49 @@ class DeckCreate extends React.Component {
       submitedFlag: true,
     }))
   }
-  handleClearAll = (e) => {
-    this.props.dispatch(handleClearAllDecks())
-  }
 
   render() {
     return (
-      <View>
-        <Text onPress={this.handleSubmit}>DeckCreate</Text>
-        <Text onPress={this.handleClearAll}>Clear All</Text>
+      <View style={styles.container}>
+        <TextInput
+          onChangeText={(title) => this.setState({title})}
+          value={this.state.title}
+          style={styles.input}
+        />
+        <TouchableOpacity onPress={this.handleSubmit} style={styles.button}>
+          <Text style={styles.buttonText}>Create Deck</Text>
+        </TouchableOpacity>
       </View>
     )
   }
 }
 
-function mapStateToProps ({decks}) {
-  return {
-    decks
-  }
-}
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  input: {
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: veryberry,
+    padding: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    height: 45,
+    borderRadius: 2,
+    alignSelf: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+})
 
-export default connect(mapStateToProps)(DeckCreate)
+export default connect()(DeckCreate)

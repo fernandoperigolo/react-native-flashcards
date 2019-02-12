@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { handleFetchDecks } from '../actions/decks'
-import { View, Text } from 'react-native'
+import { handleFetchDecks, handleClearAllDecks } from '../actions/decks'
+import { View, Text, StyleSheet } from 'react-native'
 import DeckListItem from '../components/DeckListItem'
 
 class DeckList extends React.Component {
@@ -9,17 +9,29 @@ class DeckList extends React.Component {
     this.props.dispatch(handleFetchDecks())
   }
 
+  handleClearAll = (e) => {
+    this.props.dispatch(handleClearAllDecks())
+  }
+
   render() {
     const { decks } = this.props
     return (
-      <View>
+      <View style={styles.container}>
         {Object.keys(decks).map((id) => (
-          <DeckListItem key={id} name={decks[id].title} qty={8} />
+          <DeckListItem key={id} name={decks[id].title} qty={decks[id].cardsQty} />
         ))}
+
+        <Text onPress={this.handleClearAll}>Clear All</Text>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+})
 
 function mapStateToProps ({decks}) {
   return {

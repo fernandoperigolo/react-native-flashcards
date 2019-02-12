@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   deckContainer: {
     backgroundColor: lightgray,
     padding: 10,
-    margin: 10,
+    marginBottom: 10,
     marginTop: 0,
   },
   deckName: {

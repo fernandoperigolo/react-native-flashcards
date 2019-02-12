@@ -48,12 +48,9 @@ export function handleFetchDecks () {
 
 export function handleClearAllDecks () {
   return (dispatch) => {
-    try{
-      dispatch(clearAllDecks())
-      clearAllDecksAPI()
-    } catch (error) {
-      console.warn(error)
-    }
+    clearAllDecksAPI()
+    .then(() => dispatch(clearAllDecks()))
+    .catch(error => console.warn(error))
   }
 }
 
@@ -63,14 +60,12 @@ export function handleAddDeck (title) {
       id: Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
       timestamp: Date.now(),
       title,
+      cardsQty: 0,
     }
 
-    try{
-      dispatch(submitDeck(deckData))
-      submitDeckAPI(deckData)
-    } catch (error) {
-      console.warn(error)
-    }
+    submitDeckAPI(deckData)
+    .then(() => dispatch(submitDeck(deckData)))
+    .catch(error => console.warn(error))
   }
 }
 
