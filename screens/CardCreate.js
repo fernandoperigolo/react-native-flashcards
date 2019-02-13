@@ -1,12 +1,83 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { connect } from 'react-redux'
+import { handleAddCard } from '../actions/cards'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { veryberry } from '../utils/colors'
 
-export default class CardCreate extends React.Component {
+class CardCreate extends React.Component {
+  static navigationOptions = () => {
+    return {
+      title: 'New Card',
+    }
+  }
+
+  state = {
+    question: '',
+    answer: '',
+    submitedFlag: false,
+  }
+
+  handleSubmit = (e) => {
+    this.props.dispatch(handleAddCard(
+      this.props.navigation.state.params.deckId,
+      this.state.question,
+      this.state.answer,
+    ))
+
+    this.setState(() => ({
+      question: '',
+      answer: '',
+      submitedFlag: true,
+    }))
+  }
   render() {
     return (
-      <View>
-        <Text>CardCreate</Text>
+      <View style={styles.container}>
+        <Text>{JSON.stringify(this.props)}</Text>
+        <TextInput
+          onChangeText={(question) => this.setState({question})}
+          value={this.state.question}
+          style={styles.input}
+        />
+        <TextInput
+          onChangeText={(answer) => this.setState({answer})}
+          value={this.state.answer}
+          style={styles.input}
+        />
+        <TouchableOpacity onPress={this.handleSubmit} style={styles.button}>
+          <Text style={styles.buttonText}>Create Card</Text>
+        </TouchableOpacity>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+  },
+  input: {
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 10,
+    marginBottom: 10,
+  },
+  button: {
+    backgroundColor: veryberry,
+    padding: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    height: 45,
+    borderRadius: 2,
+    alignSelf: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+})
+
+export default connect()(CardCreate)

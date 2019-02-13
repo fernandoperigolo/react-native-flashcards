@@ -15,8 +15,8 @@ class DeckDetail extends React.Component {
     this.props.dispatch(handleAddDeck())
   }
 
-  newCard = (e) => {
-    this.props.dispatch(handleAddDeck())
+  newCard = (deckId) => {
+    this.props.navigation.navigate('CardCreate', {deckId})
   }
 
   deleteDeck = (deck) => {
@@ -34,7 +34,7 @@ class DeckDetail extends React.Component {
           <Text style={styles.buttonText}>Start Quiz</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.newCard} style={styles.button}>
+        <TouchableOpacity onPress={() => this.newCard(deck.id)} style={styles.button}>
           <Text style={styles.buttonText}>Add New Card</Text>
         </TouchableOpacity>
 

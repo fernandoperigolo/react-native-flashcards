@@ -1,16 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { handleFetchDecks, handleClearAllDecks } from '../actions/decks'
+import { handleFetchDecks } from '../actions/decks'
+import { handleFetchCards } from '../actions/cards'
 import { View, Text, StyleSheet } from 'react-native'
 import DeckListItem from '../components/DeckListItem'
 
 class DeckList extends React.Component {
   componentDidMount() {
     this.props.dispatch(handleFetchDecks())
-  }
-
-  handleClearAll = (e) => {
-    this.props.dispatch(handleClearAllDecks())
+    this.props.dispatch(handleFetchCards())
   }
 
   render() {
@@ -20,8 +18,6 @@ class DeckList extends React.Component {
         {Object.keys(decks).map((id) => (
           <DeckListItem key={id} deck={decks[id]} />
         ))}
-
-        <Text onPress={this.handleClearAll}>Clear All</Text>
       </View>
     )
   }
