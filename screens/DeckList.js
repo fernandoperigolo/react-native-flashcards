@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { handleFetchDecks } from '../actions/decks'
 import { handleFetchCards } from '../actions/cards'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import DeckListItem from '../components/DeckListItem'
 
 class DeckList extends React.Component {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps ({decks}) {
   return {
-    decks
+    decks,
   }
 }
 

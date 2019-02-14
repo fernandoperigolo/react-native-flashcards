@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { lightgray } from '../utils/colors'
@@ -9,12 +10,17 @@ class DeckListItem extends React.Component {
   }
 
   render() {
-    const { id, title, cardsQty } = this.props.deck
+    const { deck, cardsQty } = this.props
+
     return (
-      <TouchableOpacity onPress={() => this.navigateTo(this.props.deck)}>
+      <TouchableOpacity onPress={() => this.navigateTo(deck)}>
         <View style={styles.deckContainer}>
-          <Text style={styles.deckName}>{title} - {id}</Text>
-          <Text style={styles.deckCardsQty}>{cardsQty} cards</Text>
+          <Text style={styles.deckName}>{deck.title} - {deck.id}</Text>
+          <Text style={styles.deckCardsQty}>
+            {cardsQty === 0 && `No cards here :(`}
+            {cardsQty === 1 && `1 Card`}
+            {cardsQty > 1 && `${cardsQty} Cards`}
+          </Text>
         </View>
       </TouchableOpacity>
     )
@@ -36,4 +42,12 @@ const styles = StyleSheet.create({
   },
 })
 
-export default withNavigation(DeckListItem)
+function mapStateToProps ({cards}, {deck}) {
+  const deckCards = cards[deck.id]
+  const cardsQty = deckCards ? Object.keys(deckCards).length : 0
+  return {
+    cardsQty
+  }
+}
+
+export default connect(mapStateToProps)(withNavigation(DeckListItem))

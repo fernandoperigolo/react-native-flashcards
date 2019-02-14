@@ -36,9 +36,26 @@ export function fetchCards () {
 }
 
 export function submitCard (card) {
-  return AsyncStorage.mergeItem(CARDS_STORAGE_KEY, JSON.stringify({
-    [card.deckId]: card
-  }))
+  return AsyncStorage.getItem(CARDS_STORAGE_KEY)
+  .then(data => {
+    const currentCards = JSON.parse(data)
+    if(currentCards === null || !currentCards[card.deckId]){
+      AsyncStorage.mergeItem(CARDS_STORAGE_KEY, JSON.stringify({
+        [card.deckId]: {
+          [card.id]:card
+        }
+      }))
+    } else {
+      const newCards = {
+        ...currentCards,
+        [card.deckId]: {
+          ...currentCards[card.deckId],
+          [card.id]: card
+        },
+      }
+      AsyncStorage.setItem(CARDS_STORAGE_KEY, JSON.stringify(newCards))
+    }
+  })
 }
 
 export function removeCard () {
