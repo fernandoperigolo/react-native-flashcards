@@ -60,7 +60,6 @@ export function handleAddDeck (title) {
       id: Date.now().toString(36) + Math.random().toString(36).substr(2, 5),
       timestamp: Date.now(),
       title,
-      cardsQty: 0,
     }
 
     submitDeckAPI(deckData)

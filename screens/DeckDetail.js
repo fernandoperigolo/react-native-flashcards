@@ -24,11 +24,15 @@ class DeckDetail extends React.Component {
   }
 
   render() {
-    const { deck } = this.props.navigation.state.params
+    const { deck, cardsQty } = this.props.navigation.state.params
 
     return (
       <View style={styles.container}>
-        <Text>{JSON.stringify(this.props)}</Text>
+        <Text>
+          {cardsQty === 0 && `No cards here :(`}
+          {cardsQty === 1 && `1 Card`}
+          {cardsQty > 1 && `${cardsQty} Cards`}
+        </Text>
 
         <TouchableOpacity onPress={this.startQuiz} style={styles.button}>
           <Text style={styles.buttonText}>Start Quiz</Text>

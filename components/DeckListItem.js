@@ -5,15 +5,15 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { lightgray } from '../utils/colors'
 
 class DeckListItem extends React.Component {
-  navigateTo = (deck) => {
-    this.props.navigation.navigate('DeckDetail', {deck})
+  navigateTo = (deck, cardsQty) => {
+    this.props.navigation.navigate('DeckDetail', {deck, cardsQty})
   }
 
   render() {
     const { deck, cardsQty } = this.props
 
     return (
-      <TouchableOpacity onPress={() => this.navigateTo(deck)}>
+      <TouchableOpacity onPress={() => this.navigateTo(deck,cardsQty)}>
         <View style={styles.deckContainer}>
           <Text style={styles.deckName}>{deck.title} - {deck.id}</Text>
           <Text style={styles.deckCardsQty}>
