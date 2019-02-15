@@ -19,6 +19,8 @@ class DeckCreate extends React.Component {
       title: '',
       submitedFlag: true,
     }))
+
+    this.props.navigation.goBack()
   }
 
   render() {

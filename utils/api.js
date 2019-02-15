@@ -62,8 +62,16 @@ export function removeCard () {
   return AsyncStorage.clear()
 }
 
-export function clearAllDeckCards () {
-  return AsyncStorage.clear()
+export function clearAllDeckCards (deckId) {
+  return AsyncStorage.getItem(CARDS_STORAGE_KEY)
+  .then(data => {
+    const currentCards = JSON.parse(data)
+    const newCards = {
+      ...currentCards,
+      [deckId]: {},
+    }
+    AsyncStorage.setItem(CARDS_STORAGE_KEY, JSON.stringify(newCards))
+  })
 }
 
 export function clearAllCards () {

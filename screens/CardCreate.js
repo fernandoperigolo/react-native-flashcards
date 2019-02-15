@@ -29,11 +29,12 @@ class CardCreate extends React.Component {
       answer: '',
       submitedFlag: true,
     }))
+
+    this.props.navigation.goBack()
   }
   render() {
     return (
       <View style={styles.container}>
-        <Text>{JSON.stringify(this.props)}</Text>
         <TextInput
           onChangeText={(question) => this.setState({question})}
           value={this.state.question}

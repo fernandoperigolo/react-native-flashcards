@@ -5,6 +5,8 @@ import {
   clearAllDecks as clearAllDecksAPI
 } from '../utils/api'
 
+import { handleClearAllDeckCards } from './cards'
+
 export const FETCH_DECKS = 'FETCH_DECKS'
 export const SUBMIT_DECK = 'SUBMIT_DECK'
 export const REMOVE_DECK = 'REMOVE_DECK'
@@ -86,6 +88,7 @@ export function handleDeleteDeck (deck) {
   return (dispatch) => {
     return removeDeckAPI(deck.id)
       .then(dispatch(removeDeck(deck.id)))
+      .then(dispatch(handleClearAllDeckCards(deck.id)))
       .catch(error =>  console.warn(error))
   }
 }

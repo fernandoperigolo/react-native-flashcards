@@ -24,7 +24,7 @@ class DeckDetail extends React.Component {
   }
 
   render() {
-    const { deck, cardsQty } = this.props.navigation.state.params
+    const { deck, cardsQty } = this.props
 
     return (
       <View style={styles.container}>
@@ -73,4 +73,15 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect()(DeckDetail)
+
+function mapStateToProps ({decks, cards}, {navigation}) {
+  const deckId = navigation.state.params.deck.id
+  const deckCards = cards[deckId]
+  const cardsQty = deckCards ? Object.keys(deckCards).length : 0
+  return {
+    deck: decks[deckId],
+    cardsQty
+  }
+}
+
+export default connect(mapStateToProps)(DeckDetail)
