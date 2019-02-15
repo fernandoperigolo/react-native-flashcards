@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     marginTop: 0,
+    borderRadius: 4,
   },
   deckName: {
     fontSize: 20,

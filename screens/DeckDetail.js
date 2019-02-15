@@ -11,8 +11,8 @@ class DeckDetail extends React.Component {
     }
   }
 
-  startQuiz = (e) => {
-    this.props.dispatch(handleAddDeck())
+  startQuiz = (deck) => {
+    this.props.navigation.navigate('Quiz', {deck})
   }
 
   newCard = (deckId) => {
@@ -34,9 +34,11 @@ class DeckDetail extends React.Component {
           {cardsQty > 1 && `${cardsQty} Cards`}
         </Text>
 
-        <TouchableOpacity onPress={this.startQuiz} style={styles.button}>
-          <Text style={styles.buttonText}>Start Quiz</Text>
-        </TouchableOpacity>
+        {cardsQty > 0 &&
+          <TouchableOpacity onPress={() => this.startQuiz(deck)} style={styles.button}>
+            <Text style={styles.buttonText}>Start Quiz</Text>
+          </TouchableOpacity>
+        }
 
         <TouchableOpacity onPress={() => this.newCard(deck.id)} style={styles.button}>
           <Text style={styles.buttonText}>Add New Card</Text>
@@ -62,7 +64,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     height: 45,
     borderRadius: 2,
-    alignSelf: 'flex-end',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -73,14 +74,13 @@ const styles = StyleSheet.create({
   },
 })
 
-
 function mapStateToProps ({decks, cards}, {navigation}) {
   const deckId = navigation.state.params.deck.id
   const deckCards = cards[deckId]
   const cardsQty = deckCards ? Object.keys(deckCards).length : 0
   return {
     deck: decks[deckId],
-    cardsQty
+    cardsQty,
   }
 }
 
