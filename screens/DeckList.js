@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { handleFetchDecks } from '../actions/decks'
 import { handleFetchCards } from '../actions/cards'
-import { View, StyleSheet } from 'react-native'
+import { ScrollView, View, StyleSheet } from 'react-native'
 import DeckListItem from '../components/DeckListItem'
 
 class DeckList extends React.Component {
@@ -14,11 +14,11 @@ class DeckList extends React.Component {
   render() {
     const { decks } = this.props
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         {Object.keys(decks).map((id) => (
           <DeckListItem key={id} deck={decks[id]} />
         ))}
-      </View>
+      </ScrollView>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { View, Text,TouchableOpacity, StyleSheet } from 'react-native'
+import { ScrollView, View, Text,TouchableOpacity, StyleSheet } from 'react-native'
 import { veryberry } from '../utils/colors'
 
 class Quiz extends React.Component {
@@ -59,7 +59,7 @@ class Quiz extends React.Component {
 
     if(finished) {
       return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
           <Text>Result</Text>
           <Text>You points {rightAnswers} of {cardsQty}</Text>
           <TouchableOpacity onPress={() => this.restartQuiz()} style={styles.button}>
@@ -68,12 +68,12 @@ class Quiz extends React.Component {
           <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.button}>
             <Text style={styles.buttonText}>Back To Deck</Text>
           </TouchableOpacity>
-        </View>
+        </ScrollView>
       )
     }
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View>
           <Text>Card {cardIndex + 1} of {cardsQty}</Text>
         </View>
@@ -97,7 +97,7 @@ class Quiz extends React.Component {
             </TouchableOpacity>
           </View>
         }
-      </View>
+      </ScrollView>
     )
   }
 }

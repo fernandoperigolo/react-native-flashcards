@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { handleAddDeck } from '../actions/decks'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { veryberry } from '../utils/colors'
 
 class DeckCreate extends React.Component {
@@ -25,7 +25,7 @@ class DeckCreate extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <TextInput
           onChangeText={(title) => this.setState({title})}
           value={this.state.title}
@@ -34,7 +34,7 @@ class DeckCreate extends React.Component {
         <TouchableOpacity onPress={this.handleSubmit} style={styles.button}>
           <Text style={styles.buttonText}>Create Deck</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     )
   }
 }

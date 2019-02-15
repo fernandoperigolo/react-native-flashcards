@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { handleClearAllCards } from '../actions/cards'
 import { handleClearAllDecks } from '../actions/decks'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { ScrollView, View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { redpigment } from '../utils/colors'
 
 class Options extends React.Component {
@@ -17,7 +17,7 @@ class Options extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <TouchableOpacity onPress={this.clearAll} style={styles.button}>
           <Text style={styles.buttonText}>Clear All Data</Text>
         </TouchableOpacity>
@@ -25,7 +25,7 @@ class Options extends React.Component {
         <TouchableOpacity onPress={this.clearAllCards} style={styles.button}>
           <Text style={styles.buttonText}>Clear All Cards</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     )
   }
 }

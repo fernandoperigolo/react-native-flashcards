@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { handleAddCard } from '../actions/cards'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
+import { ScrollView, View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { veryberry } from '../utils/colors'
 
 class CardCreate extends React.Component {
@@ -34,7 +34,7 @@ class CardCreate extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <TextInput
           onChangeText={(question) => this.setState({question})}
           value={this.state.question}
@@ -48,7 +48,7 @@ class CardCreate extends React.Component {
         <TouchableOpacity onPress={this.handleSubmit} style={styles.button}>
           <Text style={styles.buttonText}>Create Card</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     )
   }
 }

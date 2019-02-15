@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { View, Text,TouchableOpacity, StyleSheet } from 'react-native'
+import { ScrollView, View, Text,TouchableOpacity, StyleSheet } from 'react-native'
 import { handleDeleteDeck } from '../actions/decks'
 import { veryberry } from '../utils/colors'
 
@@ -27,7 +27,7 @@ class DeckDetail extends React.Component {
     const { deck, cardsQty } = this.props
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text>
           {cardsQty === 0 && `No cards here :(`}
           {cardsQty === 1 && `1 Card`}
@@ -47,7 +47,7 @@ class DeckDetail extends React.Component {
         <TouchableOpacity onPress={() => this.deleteDeck(deck)} style={styles.button}>
           <Text style={styles.buttonText}>Delete This Deck</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     )
   }
 }
