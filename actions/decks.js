@@ -64,7 +64,7 @@ export function handleAddDeck (title) {
       title,
     }
 
-    submitDeckAPI(deckData)
+    return submitDeckAPI(deckData)
     .then(() => dispatch(submitDeck(deckData)))
     .catch(error => console.warn(error))
   }

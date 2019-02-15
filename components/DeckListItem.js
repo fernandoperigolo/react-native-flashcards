@@ -15,7 +15,7 @@ class DeckListItem extends React.Component {
     return (
       <TouchableOpacity onPress={() => this.navigateTo(deck,cardsQty)}>
         <View style={styles.deckContainer}>
-          <Text style={styles.deckName}>{deck.title} - {deck.id}</Text>
+          <Text style={styles.deckName}>{deck.title}</Text>
           <Text style={styles.deckCardsQty}>
             {cardsQty === 0 && `No cards here :(`}
             {cardsQty === 1 && `1 Card`}

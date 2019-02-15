@@ -13,14 +13,14 @@ class DeckCreate extends React.Component {
   handleSubmit = (e) => {
     this.props.dispatch(handleAddDeck(
       this.state.title
-    ))
+    )).then(result => {
+      this.props.navigation.navigate('DeckDetail', { deck: result.deck, cardsQty:0 })
+    })
 
     this.setState(() => ({
       title: '',
       submitedFlag: true,
     }))
-
-    this.props.navigation.goBack()
   }
 
   render() {
