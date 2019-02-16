@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withNavigation } from 'react-navigation'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { lightgray } from '../utils/colors'
+import CardCounter from './CardCounter'
 
 class DeckListItem extends React.Component {
   navigateTo = (deck, cardsQty) => {
@@ -16,11 +17,7 @@ class DeckListItem extends React.Component {
       <TouchableOpacity onPress={() => this.navigateTo(deck,cardsQty)}>
         <View style={styles.deckContainer}>
           <Text style={styles.deckName}>{deck.title}</Text>
-          <Text style={styles.deckCardsQty}>
-            {cardsQty === 0 && `No cards here :(`}
-            {cardsQty === 1 && `1 Card`}
-            {cardsQty > 1 && `${cardsQty} Cards`}
-          </Text>
+          <CardCounter cardsQty={cardsQty} />
         </View>
       </TouchableOpacity>
     )
@@ -37,9 +34,6 @@ const styles = StyleSheet.create({
   },
   deckName: {
     fontSize: 20,
-  },
-  deckCardsQty: {
-    fontSize: 14,
   },
 })
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, View, Text,TouchableOpacity, StyleSheet } from 'react-native'
 import { handleDeleteDeck } from '../actions/decks'
+import CardCounter from '../components/CardCounter'
 import { veryberry, lightgray, energos, barared } from '../utils/colors'
 
 class DeckDetail extends React.Component {
@@ -29,11 +30,7 @@ class DeckDetail extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.deckContainer}>
-          <Text>
-            {cardsQty === 0 && `No cards here :(`}
-            {cardsQty === 1 && `1 Card`}
-            {cardsQty > 1 && `${cardsQty} Cards`}
-          </Text>
+          <CardCounter cardsQty={cardsQty} />
         </View>
 
         {cardsQty > 0 &&
