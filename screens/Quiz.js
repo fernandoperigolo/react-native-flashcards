@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, View, Text,TouchableOpacity, StyleSheet } from 'react-native'
-import { veryberry } from '../utils/colors'
+import { veryberry, energos, barared, lightgray, white } from '../utils/colors'
 
 class Quiz extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -60,14 +60,16 @@ class Quiz extends React.Component {
     if(finished) {
       return (
         <ScrollView style={styles.container}>
-          <Text>Result</Text>
-          <Text>You points {rightAnswers} of {cardsQty}</Text>
-          <TouchableOpacity onPress={() => this.restartQuiz()} style={styles.button}>
-            <Text style={styles.buttonText}>Try Again</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={styles.button}>
-            <Text style={styles.buttonText}>Back To Deck</Text>
-          </TouchableOpacity>
+          <Text style={styles.cardTitle}>Result</Text>
+          <Text style={styles.cardCount}>You points {rightAnswers} of {cardsQty}</Text>
+          <View style={styles.actions}>
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.button, {backgroundColor:barared}]}>
+              <Text style={styles.buttonText}>Back To Deck</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.restartQuiz()} style={[styles.button, {backgroundColor:energos}]}>
+              <Text style={styles.buttonText}>Try Again</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       )
     }
@@ -75,26 +77,32 @@ class Quiz extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <View>
-          <Text>Card {cardIndex + 1} of {cardsQty}</Text>
+          <Text style={styles.cardCount}>Card {cardIndex + 1} of {cardsQty}</Text>
         </View>
 
         {showAnswer === false ?
           <View>
-            <Text>Question:</Text>
-            <Text>{cards[currentCardId].question}</Text>
-            <TouchableOpacity onPress={() => this.showAnswer()} style={styles.button}>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Question:</Text>
+              <Text>{cards[currentCardId].question}</Text>
+            </View>
+            <TouchableOpacity onPress={() => this.showAnswer()} style={[styles.button, {backgroundColor:energos}]}>
               <Text style={styles.buttonText}>Show Answer</Text>
             </TouchableOpacity>
           </View>
         : <View>
-            <Text>Correct answer is:</Text>
-            <Text>{cards[currentCardId].answer}</Text>
-            <TouchableOpacity onPress={() => this.correctAnswer()} style={styles.button}>
-              <Text style={styles.buttonText}>Correct</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.nextCard()} style={styles.button}>
-              <Text style={styles.buttonText}>Incorrect</Text>
-            </TouchableOpacity>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Correct answer is:</Text>
+              <Text>{cards[currentCardId].answer}</Text>
+            </View>
+            <View style={styles.actions}>
+              <TouchableOpacity onPress={() => this.nextCard()} style={[styles.button, {backgroundColor:barared}]}>
+                <Text style={styles.buttonText}>Incorrect</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.correctAnswer()} style={[styles.button, {backgroundColor:energos}]}>
+                <Text style={styles.buttonText}>Correct</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         }
       </ScrollView>
@@ -106,6 +114,43 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
   },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  cardCount: {
+    textAlign: 'center',
+    alignSelf: 'center',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    borderRadius: 20,
+    backgroundColor: veryberry,
+    color: white,
+    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+  card: {
+    backgroundColor: lightgray,
+    padding: 10,
+    marginBottom: 10,
+    textAlign: 'center',
+    borderColor: veryberry,
+    borderWidth: 2,
+    borderRadius: 4,
+  },
+  cardTitle: {
+    fontSize: 16,
+    color: veryberry,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    flex: 1,
+    textAlign: 'center',
+  },
+  cardText: {
+    fontSize: 16,
+  },
   button: {
     backgroundColor: veryberry,
     padding: 10,
@@ -113,7 +158,7 @@ const styles = StyleSheet.create({
     paddingRight: 30,
     marginBottom: 10,
     height: 45,
-    borderRadius: 2,
+    borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },

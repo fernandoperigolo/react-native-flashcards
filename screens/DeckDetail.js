@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, View, Text,TouchableOpacity, StyleSheet } from 'react-native'
 import { handleDeleteDeck } from '../actions/decks'
-import { veryberry } from '../utils/colors'
+import { veryberry, lightgray, energos, barared } from '../utils/colors'
 
 class DeckDetail extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -28,23 +28,25 @@ class DeckDetail extends React.Component {
 
     return (
       <ScrollView style={styles.container}>
-        <Text>
-          {cardsQty === 0 && `No cards here :(`}
-          {cardsQty === 1 && `1 Card`}
-          {cardsQty > 1 && `${cardsQty} Cards`}
-        </Text>
+        <View style={styles.deckContainer}>
+          <Text>
+            {cardsQty === 0 && `No cards here :(`}
+            {cardsQty === 1 && `1 Card`}
+            {cardsQty > 1 && `${cardsQty} Cards`}
+          </Text>
+        </View>
 
         {cardsQty > 0 &&
-          <TouchableOpacity onPress={() => this.startQuiz(deck)} style={styles.button}>
+          <TouchableOpacity onPress={() => this.startQuiz(deck)} style={[styles.button, {backgroundColor:energos}]}>
             <Text style={styles.buttonText}>Start Quiz</Text>
           </TouchableOpacity>
         }
 
-        <TouchableOpacity onPress={() => this.newCard(deck.id)} style={styles.button}>
+        <TouchableOpacity onPress={() => this.newCard(deck.id)} style={[styles.button, {backgroundColor:energos}]}>
           <Text style={styles.buttonText}>Add New Card</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => this.deleteDeck(deck)} style={styles.button}>
+        <TouchableOpacity onPress={() => this.deleteDeck(deck)} style={[styles.button, {backgroundColor:barared}]}>
           <Text style={styles.buttonText}>Delete This Deck</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -55,6 +57,13 @@ class DeckDetail extends React.Component {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+  },
+  deckContainer: {
+    backgroundColor: lightgray,
+    padding: 10,
+    marginBottom: 10,
+    marginTop: 0,
+    borderRadius: 4,
   },
   button: {
     backgroundColor: veryberry,

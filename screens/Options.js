@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { handleClearAllCards } from '../actions/cards'
 import { handleClearAllDecks } from '../actions/decks'
-import { ScrollView, View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { ScrollView, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { redpigment } from '../utils/colors'
 
 class Options extends React.Component {
