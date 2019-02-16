@@ -13,6 +13,7 @@ import Options from './screens/Options'
 import CardCreate from './screens/CardCreate'
 import Quiz from './screens/Quiz'
 import { veryberry, energos, white } from './utils/colors'
+import { setLocalNotification } from './utils/notification'
 
 const HomeTabNavigator = createMaterialTopTabNavigator({
   DeckList: {
@@ -81,6 +82,9 @@ const AppContainer = createAppContainer(StackNavigator)
 const store = createStore(reducer, middleware)
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={store}>

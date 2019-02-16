@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, View, Text,TouchableOpacity, StyleSheet } from 'react-native'
 import { veryberry, energos, barared, lightgray, white } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/notification'
 
 class Quiz extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -35,6 +36,7 @@ class Quiz extends React.Component {
       this.setState(() => ({
         finished: true,
       }))
+      clearLocalNotification().then(setLocalNotification)
     } else {
       this.setState((state) => ({
         showAnswer: false,
